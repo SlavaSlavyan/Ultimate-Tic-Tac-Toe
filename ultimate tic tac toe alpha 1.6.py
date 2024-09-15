@@ -400,12 +400,12 @@ def SmallCellsWinCheck(i):
 def OWIN(i):
     for s in range(1,10):
         clear_select(s)
-    title("Игрок X Выйграл, Нажмите что бы выйти")
+    title("Игрок 0 Выйграл, Нажмите что бы выйти")
     exitonclick()
 def XWIN(i):
     for s in range(1,10):
         clear_select(s)
-    title("Игрок 0 Выйграл, Нажмите что бы выйти")
+    title("Игрок X Выйграл, Нажмите что бы выйти")
     exitonclick()
 def DRAW():
     for s in range(1,10):
