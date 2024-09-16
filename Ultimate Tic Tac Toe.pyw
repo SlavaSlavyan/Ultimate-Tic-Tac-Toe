@@ -430,20 +430,20 @@ def SmallCellsWinCheck(i):
         PrintBigCircle(i)
 
 def OWIN(i):
-    for s in range(1,10):
-        clear_select(s)
+    global last_selected
+    clear_select(last_selected)
     title("Игрок 0 Выйграл, Нажмите что бы выйти")
     exitonclick()
 
 def XWIN(i):
-    for s in range(1,10):
-        clear_select(s)
+    global last_selected
+    clear_select(last_selected)
     title("Игрок X Выйграл, Нажмите что бы выйти")
     exitonclick()
 
 def DRAW():
-    for s in range(1,10):
-        clear_select(s)
+    global last_selected
+    clear_select(last_selected)
     title("Ничья, Нажмите что бы выйти")
     exitonclick()
 
