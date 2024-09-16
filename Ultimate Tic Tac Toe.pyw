@@ -149,8 +149,7 @@ def PrintSelect(): # Отрисовка выбора большой клетки
     speed(0)
     title("Loading...")
     if last_selected == None:
-        for i in range(0,9):
-            clear_select(i)
+        pass
     else:
         clear_select(last_selected)
     up()
@@ -532,16 +531,14 @@ def SelectBigCell(x,y): # Выбор большой клетки
         CheckSelectedBigCell(big_selected_cell)
 
 def NextBigCell():
-    global big_selected_cell, small_selected_cell, cellsm, player
+    global big_selected_cell, small_selected_cell, cellsm, player, last_selected
     big_selected_cell = small_selected_cell
     if cells[big_selected_cell] == xcell or cells[big_selected_cell] == ocell:
         big_selected_cell = None
-        for i in range(1,10):
-            clear_select(i)
+        clear_select(last_selected)
     elif 0 not in cells[big_selected_cell]:
         big_selected_cell = None
-        for i in range(1,10):
-            clear_select(i)
+        clear_select(last_selected)
     else:
         PrintSelect()
 
