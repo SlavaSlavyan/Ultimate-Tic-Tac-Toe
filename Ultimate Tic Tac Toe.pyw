@@ -1,5 +1,6 @@
 # Импорт библиотек
 
+from os import stat
 from turtle import * # Графика
 from winsound import * # Звуки
 
@@ -22,7 +23,35 @@ screen = Screen()
 xcell = [3,3,3,3,3,3,3,3,3]
 ocell = [4,4,4,4,4,4,4,4,4]
 Beep(500,50)
+status = 0
+hideturtle()
 # Функции нацеленные на отрисовку
+
+def PrintStartScreen():
+    up()
+    title("Start Screen")
+    pensize(5)
+    speed(9999999999999999999999999999999999999999999)
+    down()
+    fd(-200)
+    for i in range(3):
+        for i in range(2):
+            fd(400)
+            rt(90)
+            fd(50)
+            rt(90)   
+        up()
+        goto(xcor(),ycor()-50)
+        down()
+    up()
+    goto(0,100)
+    write("Ultimate\n Tic Tac Toe", move=False, align="center", font=("Courier New", 60, "normal"))
+    goto(0,-50)
+    write("Play", move=False, align="center", font=("Courier New", 35, "normal"))
+    goto(0,-100)
+    write("Rules", move=False, align="center", font=("Courier New", 35, "normal"))
+    goto(0,-150)
+    write("Language", move=False, align="center", font=("Courier New", 35, "normal"))
 
 def PrintMiniCell(x, y): # Отрисовка маленькой части поля
     title("Loading...")
@@ -399,11 +428,13 @@ def OWIN(i):
         clear_select(s)
     title("Игрок 0 Выйграл, Нажмите что бы выйти")
     exitonclick()
+
 def XWIN(i):
     for s in range(1,10):
         clear_select(s)
     title("Игрок X Выйграл, Нажмите что бы выйти")
     exitonclick()
+
 def DRAW():
     for s in range(1,10):
         clear_select(s)
@@ -449,7 +480,6 @@ def WinCheck():
 
     if 0 not in cells[0] and 0 not in cells[1] and 0 not in cells[2] and 0 not in cells[3] and 0 not in cells[4] and 0 not in cells[5] and 0 not in cells[6] and 0 not in cells[7] and 0 not in cells[8]:
         DRAW()
-
 
 def CheckSelectedBigCell(s): # Проверка содержимого выбранной большой клетки
     global big_selected_cell, player
@@ -595,24 +625,41 @@ def OPlayer(x,y): # Ход игрока 0
     else:
         SelectSmallCell(x,y)
 
+def StartScreen(x,y):
+    global status
+    if x > -200 and x < 200 and y > -50 and y < 0:
+        clear()
+        up()
+        goto(0,0)
+        PrintCells()
+        status = 1
+        title("[X] Выберите большую клетку")
+
 def Main(x, y): # Основная функция
-    global player, loading
-    if loading == 0:
-        loading = 1
-        if player == 0:
-            XPlayer(x,y)
+    global player, loading, status
+    if status == 0:
+        if loading == 0:
+            loading = 1
+            StartScreen(x,y)
+            loading = 0
         else:
-            OPlayer(x,y)
-        loading = 0
-    else:
-        pass
+            pass
+    elif status == 1:
+        if loading == 0:
+            loading = 1
+            if player == 0:
+                XPlayer(x,y)
+            else:
+                OPlayer(x,y)
+            loading = 0
+        else:
+            pass
 
 # Основной код
 
 player = 0
-PrintCells()
+PrintStartScreen()
 Beep(250,50)
-title("[X] Выберите большую клетку")
 
 screen.onscreenclick(Main)
 
