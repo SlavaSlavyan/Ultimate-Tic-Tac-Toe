@@ -1,6 +1,5 @@
 # Импорт библиотек
 
-from os import stat
 from turtle import * # Графика
 from winsound import * # Звуки
 
@@ -9,6 +8,7 @@ from winsound import * # Звуки
 player = None
 big_selected_cell = None
 small_selected_cell = None
+last_selected = None
 loading = 0
 cells = [[0,0,0,0,0,0,0,0,0],
          [0,0,0,0,0,0,0,0,0],
@@ -28,10 +28,10 @@ hideturtle()
 # Функции нацеленные на отрисовку
 
 def PrintStartScreen():
+    speed(0)
     up()
     title("Start Screen")
     pensize(5)
-    speed(9999999999999999999999999999999999999999999)
     down()
     fd(-200)
     for i in range(3):
@@ -55,6 +55,7 @@ def PrintStartScreen():
 
 def PrintMiniCell(x, y): # Отрисовка маленькой части поля
     title("Loading...")
+    speed(0)
     up()
     goto(x, y)
     goto(xcor()+25,ycor()+75)
@@ -78,6 +79,7 @@ def PrintMiniCell(x, y): # Отрисовка маленькой части по
 
 def PrintCells(): # Отрисовка поля
     title("Loading...")
+    speed(0)
     up()
     pensize(10)
     speed(10)
@@ -100,7 +102,6 @@ def PrintCells(): # Отрисовка поля
     lt(90)
     up()
     pensize(5)
-    speed(9999999999999)
     PrintMiniCell(-300,100)
     PrintMiniCell(-100,100)
     PrintMiniCell(100,100)
@@ -114,27 +115,27 @@ def PrintCells(): # Отрисовка поля
 
 def clear_select(s):
     title("Loading...")
+    speed(0)
     up()
     pensize(5)
     color("white")
-    speed(9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
-    if s == 1:
+    if s == 0:
         goto(-300,100)
-    if s == 2:
+    if s == 1:
         goto(-100,100)
-    if s == 3:
+    if s == 2:
         goto(100,100)
-    if s == 4:
+    if s == 3:
         goto(-300,-100)
-    if s == 5:
+    if s == 4:
         goto(-100,-100)
-    if s == 6:
+    if s == 5:
         goto(100,-100)
-    if s == 7:
+    if s == 6:
         goto(-300,-300)
-    if s == 8:
+    if s == 7:
         goto(-100,-300)
-    if s == 9:
+    if s == 8:
         goto(100,-300)
     goto(xcor()+20,ycor()+20)
     down()
@@ -144,14 +145,17 @@ def clear_select(s):
     up()
 
 def PrintSelect(): # Отрисовка выбора большой клетки
-    global big_selected_cell
+    global big_selected_cell, last_selected
+    speed(0)
     title("Loading...")
-    for i in range(1,10):
-        clear_select(i)
+    if last_selected == None:
+        for i in range(0,9):
+            clear_select(i)
+    else:
+        clear_select(last_selected)
     up()
     pensize(5)
     color("black")
-    speed(9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
     if big_selected_cell == 0:
         goto(-300,100)
     if big_selected_cell == 1:
@@ -191,15 +195,16 @@ def PrintSelect(): # Отрисовка выбора большой клетки
         fd(30)
         lt(90)
     up()
+    last_selected = big_selected_cell
     hideturtle()
 
 def PrintCross(s, i):
+    speed(0)
     title("Loading...")
     Beep(500,50)
     up()
     pensize(5)
     color("black")
-    speed(10)
     if s == 0:
         goto(-300,100)
     if s == 1:
@@ -251,12 +256,12 @@ def PrintCross(s, i):
     goto(400, 400)
 
 def PrintCircle(s, i):
+    speed(0)
     title("Loading...")
     Beep(500,50)
     up()
     pensize(5)
     color("black")
-    speed(999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
     if s == 0:
         goto(-300,100)
     if s == 1:
@@ -303,6 +308,7 @@ def PrintCircle(s, i):
     goto(400, 400)
 
 def PrintBigCross(s):
+    speed(0)
     title("Loading...")
     up()
     pensize(15)
@@ -340,6 +346,7 @@ def PrintBigCross(s):
     up()
 
 def PrintBigCircle(s):
+    speed(0)
     title("Loading...")
     up()
     pensize(15)
