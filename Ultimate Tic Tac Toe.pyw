@@ -14,9 +14,9 @@ RU_xw = "Игрок X выйграл"
 RU_ow = "Игрок 0 выйграл"
 RU_d = "НИЧЬЯ"
 RU_gn = "Супер\nКрестики-Нолики"
-RU_p = "Играть"
-RU_r = "Правила"
-RU_lg = "Язык"
+RU_p = "Играть➡"
+RU_r = "Правила📗"
+RU_lg = "Язык🌐"
 RU_ss = "Начальный экран"
 
 EN_l = "Loading..."
@@ -28,9 +28,9 @@ EN_xw = "Player X win!"
 EN_ow = "Player 0 win!"
 EN_d = "DRAW"
 EN_gn = "Ultimate\n Tic Tac Toe"
-EN_p = "Play"
-EN_r = "Rules"
-EN_lg = "Language"
+EN_p = "Play➡"
+EN_r = "Rules📗"
+EN_lg = "Language🌐"
 EN_ss = "Start Screen"
 
 # Переменные
@@ -40,7 +40,7 @@ big_selected_cell = None
 small_selected_cell = None
 last_selected = None
 loading = 0
-language = "RU"
+language = "EN"
 cells = [[0,0,0,0,0,0,0,0,0],
          [0,0,0,0,0,0,0,0,0],
          [0,0,0,0,0,0,0,0,0],
