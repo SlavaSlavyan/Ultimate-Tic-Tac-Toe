@@ -3,6 +3,36 @@
 from turtle import * # Графика
 from winsound import * # Звуки
 
+# language
+
+RU_l = "Загрузка..."
+RU_xsbc = "[X] Выберите БОЛЬШУЮ клетку"
+RU_xssc = "[X] Выберите МАЛЕНЬКУЮ клетку"
+RU_osbc = "[0] Выберите БОЛЬШУЮ клетку"
+RU_ossc = "[0] Выберите МАЛЕНЬКУЮ клетку"
+RU_xw = "Игрок X выйграл"
+RU_ow = "Игрок 0 выйграл"
+RU_d = "НИЧЬЯ"
+RU_gn = "Супер\nКрестики-Нолики"
+RU_p = "Играть"
+RU_r = "Правила"
+RU_lg = "Язык"
+RU_ss = "Начальный экран"
+
+EN_l = "Loading..."
+EN_xsbc = "[X] Select BIG cell"
+EN_xssc = "[X] Select SMALL cell"
+EN_osbc = "[0] Select BIG cell"
+EN_ossc = "[0] Select SMALL cell"
+EN_xw = "Player X win!"
+EN_ow = "Player 0 win!"
+EN_d = "DRAW"
+EN_gn = "Ultimate\n Tic Tac Toe"
+EN_p = "Play"
+EN_r = "Rules"
+EN_lg = "Language"
+EN_ss = "Start Screen"
+
 # Переменные
 
 player = None
@@ -10,6 +40,7 @@ big_selected_cell = None
 small_selected_cell = None
 last_selected = None
 loading = 0
+language = "RU"
 cells = [[0,0,0,0,0,0,0,0,0],
          [0,0,0,0,0,0,0,0,0],
          [0,0,0,0,0,0,0,0,0],
@@ -28,9 +59,13 @@ hideturtle()
 # Функции нацеленные на отрисовку
 
 def PrintStartScreen():
+    global language, EN_ss, RU_ss, EN_gn, RU_gn, EN_r, RU_r, EN_lg, RU_lg, RU_p, EN_p
     speed(0)
     up()
-    title("Start Screen")
+    if language == "EN":
+        title(EN_ss)
+    if language == "RU":
+        title(RU_ss)
     pensize(5)
     down()
     fd(-200)
@@ -45,16 +80,32 @@ def PrintStartScreen():
         down()
     up()
     goto(0,100)
-    write("Ultimate\n Tic Tac Toe", move=False, align="center", font=("Courier New", 60, "normal"))
+    if language == "EN":
+        write(EN_gn, move=False, align="center", font=("Courier New", 60, "italic"))
+    if language == "RU":
+        write(RU_gn, move=False, align="center", font=("Courier New", 60, "italic"))
     goto(0,-50)
-    write("Play", move=False, align="center", font=("Courier New", 35, "normal"))
+    if language == "EN":
+        write(EN_p, move=False, align="center", font=("Courier New", 35, "normal"))
+    if language == "RU":
+        write(RU_p, move=False, align="center", font=("Courier New", 35, "normal"))
     goto(0,-100)
-    write("Rules", move=False, align="center", font=("Courier New", 35, "normal"))
+    if language == "EN":
+        write(EN_r, move=False, align="center", font=("Courier New", 35, "normal"))
+    if language == "RU":
+        write(RU_r, move=False, align="center", font=("Courier New", 35, "normal"))
     goto(0,-150)
-    write("Language", move=False, align="center", font=("Courier New", 35, "normal"))
+    if language == "EN":
+        write(EN_lg, move=False, align="center", font=("Courier New", 35, "normal"))
+    if language == "RU":
+        write(RU_lg, move=False, align="center", font=("Courier New", 35, "normal"))
 
 def PrintMiniCell(x, y): # Отрисовка маленькой части поля
-    title("Loading...")
+    global EN_l, RU_l
+    if language == "EN":
+        title(EN_l)
+    if language == "RU":
+        title(RU_l)
     speed(0)
     up()
     goto(x, y)
@@ -78,7 +129,11 @@ def PrintMiniCell(x, y): # Отрисовка маленькой части по
     up()
 
 def PrintCells(): # Отрисовка поля
-    title("Loading...")
+    global EN_l, RU_l
+    if language == "EN":
+        title(EN_l)
+    if language == "RU":
+        title(RU_l)
     speed(0)
     up()
     pensize(10)
@@ -114,7 +169,11 @@ def PrintCells(): # Отрисовка поля
     hideturtle()
 
 def clear_select(s):
-    title("Loading...")
+    global EN_l, RU_l
+    if language == "EN":
+        title(EN_l)
+    if language == "RU":
+        title(RU_l)
     speed(0)
     up()
     pensize(5)
@@ -147,7 +206,12 @@ def clear_select(s):
 def PrintSelect(): # Отрисовка выбора большой клетки
     global big_selected_cell, last_selected
     speed(0)
-    title("Loading...")
+    global EN_l, RU_l
+    if language == "EN":
+        title(EN_l)
+    if language == "RU":
+        title(RU_l)
+
     if last_selected == None:
         pass
     else:
@@ -199,7 +263,11 @@ def PrintSelect(): # Отрисовка выбора большой клетки
 
 def PrintCross(s, i):
     speed(0)
-    title("Loading...")
+    global EN_l, RU_l
+    if language == "EN":
+        title(EN_l)
+    if language == "RU":
+        title(RU_l)
     Beep(500,50)
     up()
     pensize(5)
@@ -256,7 +324,11 @@ def PrintCross(s, i):
 
 def PrintCircle(s, i):
     speed(0)
-    title("Loading...")
+    global EN_l, RU_l
+    if language == "EN":
+        title(EN_l)
+    if language == "RU":
+        title(RU_l)
     Beep(500,50)
     up()
     pensize(5)
@@ -308,7 +380,11 @@ def PrintCircle(s, i):
 
 def PrintBigCross(s):
     speed(0)
-    title("Loading...")
+    global EN_l, RU_l
+    if language == "EN":
+        title(EN_l)
+    if language == "RU":
+        title(RU_l)
     up()
     pensize(15)
     color("black")
@@ -346,7 +422,11 @@ def PrintBigCross(s):
 
 def PrintBigCircle(s):
     speed(0)
-    title("Loading...")
+    global EN_l, RU_l
+    if language == "EN":
+        title(EN_l)
+    if language == "RU":
+        title(RU_l)
     up()
     pensize(15)
     color("black")
@@ -432,19 +512,31 @@ def SmallCellsWinCheck(i):
 def OWIN(i):
     global last_selected
     clear_select(last_selected)
-    title("Игрок 0 Выйграл, Нажмите что бы выйти")
+    global EN_ow, RU_ow
+    if language == "EN":
+        title(EN_ow)
+    if language == "RU":
+        title(RU_ow)
     exitonclick()
 
 def XWIN(i):
     global last_selected
     clear_select(last_selected)
-    title("Игрок X Выйграл, Нажмите что бы выйти")
+    global EN_xw, RU_xw
+    if language == "EN":
+        title(EN_xw)
+    if language == "RU":
+        title(RU_xw)
     exitonclick()
 
 def DRAW():
     global last_selected
     clear_select(last_selected)
-    title("Ничья, Нажмите что бы выйти")
+    global EN_d, RU_d
+    if language == "EN":
+        title(EN_d)
+    if language == "RU":
+        title(RU_d)
     exitonclick()
 
 def WinCheck():
@@ -489,6 +581,7 @@ def WinCheck():
 
 def CheckSelectedBigCell(s): # Проверка содержимого выбранной большой клетки
     global big_selected_cell, player
+    global RU_xssc, EN_xssc, RU_ossc, EN_ossc
     if cells[s] == xcell or cells[s] == ocell:
         big_selected_cell = None
     elif 0 not in cells[s]:
@@ -497,10 +590,17 @@ def CheckSelectedBigCell(s): # Проверка содержимого выбр�
         Beep(500,50)
         PrintSelect()
         Beep(250,50)
+        
         if player == 0:
-            title("[X] Выберите маленькую клетку")
+            if language == "EN":
+                title(EN_xssc)
+            if language == "RU":
+                title(RU_xssc)
         else:
-            title("[0] Выберите маленькую клетку")
+            if language == "EN":
+                title(EN_ossc)
+            if language == "RU":
+                title(RU_ossc)
 
 def SelectBigCell(x,y): # Выбор большой клетки
     global big_selected_cell
@@ -532,6 +632,7 @@ def SelectBigCell(x,y): # Выбор большой клетки
 
 def NextBigCell():
     global big_selected_cell, small_selected_cell, cellsm, player, last_selected
+    global RU_xsbc, RU_osbc, EN_xsbc, EN_osbc, RU_xssc, EN_xssc, RU_ossc, EN_ossc
     big_selected_cell = small_selected_cell
     if cells[big_selected_cell] == xcell or cells[big_selected_cell] == ocell:
         big_selected_cell = None
@@ -545,15 +646,27 @@ def NextBigCell():
     if player == 1:
         player = 0
         Beep(250,50)
-        title("[X] Выберите маленькую клетку")
+        if language == "EN":
+            title(EN_xssc)
+        if language == "RU":
+            title(RU_xssc)
         if big_selected_cell == None:
-            title("[X] Выберите большую клетку")
+            if language == "EN":
+                title(EN_xsbc)
+            if language == "RU":
+                title(RU_xsbc)
     else:
         player = 1
         Beep(250,50)
-        title("[0] Выберите маленькую клетку")
+        if language == "EN":
+            title(EN_ossc)
+        if language == "RU":
+            title(RU_ossc)
         if big_selected_cell == None:
-            title("[0] Выберите большую клетку")
+            if language == "EN":
+                title(EN_osbc)
+            if language == "RU":
+                title(RU_osbc)
 
 def CheckSelectedSmallCell(): # Проверка содержимого выбранной маленькой клетки
     global small_selected_cell, cells, player
@@ -630,14 +743,24 @@ def OPlayer(x,y): # Ход игрока 0
         SelectSmallCell(x,y)
 
 def StartScreen(x,y):
-    global status
+    global status, language
     if x > -200 and x < 200 and y > -50 and y < 0:
         clear()
         up()
         goto(0,0)
         PrintCells()
         status = 1
-        title("[X] Выберите большую клетку")
+    if x > -200 and x < 200 and y > -150 and y < -100:
+        clear()
+        up()
+        goto(0,0)
+        if language == "RU":
+            language = 2
+        elif language == "EN":
+            language = "RU"
+        if language == 2:
+            language = "EN"
+        PrintStartScreen()
 
 def Main(x, y): # Основная функция
     global player, loading, status
