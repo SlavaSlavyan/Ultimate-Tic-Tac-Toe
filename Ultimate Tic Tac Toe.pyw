@@ -1,5 +1,7 @@
 # Импорт библиотек
 
+from json import load
+import time
 from turtle import * # Графика
 from winsound import * # Звуки
 
@@ -18,6 +20,7 @@ RU_p = "Играть➡"
 RU_r = "Правила📗"
 RU_lg = "Язык🌐"
 RU_ss = "Начальный экран"
+RU_ctx = "Нажмите чтобы выйти"
 
 EN_l = "Loading..."
 EN_xsbc = "[X] Select BIG cell"
@@ -32,6 +35,7 @@ EN_p = "Play➡"
 EN_r = "Rules📗"
 EN_lg = "Language🌐"
 EN_ss = "Start Screen"
+EN_ctx = "Click to exit"
 
 # Переменные
 
@@ -509,35 +513,93 @@ def SmallCellsWinCheck(i):
         cells[i] = ocell
         PrintBigCircle(i)
 
+def GoToMenu():
+    global big_selected_cell, small_selected_cell, last_selected, cells, status, player, loading
+    big_selected_cell = None
+    small_selected_cell = None
+    last_selected = None
+    cells = [[0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0]]
+    status = -1
+    player = 0
+    loading = 1
+    clearscreen()
+    pencolor("black")
+    hideturtle()
+    PrintStartScreen()
+
 def OWIN(i):
     global last_selected
     clear_select(last_selected)
-    global EN_ow, RU_ow
+    global EN_ow, RU_ow, RU_ctx, EN_ctx
     if language == "EN":
         title(EN_ow)
+        up()
+        pencolor("black")
+        goto(0,300)
+        write(EN_ow, move=False, align="center", font=("Courier New", 60, "normal"))
+        goto(0,-400)
+        write(EN_ctx, move=False, align="center", font=("Courier New", 60, "normal"))
     if language == "RU":
         title(RU_ow)
-    exitonclick()
+        up()
+        pencolor("black")
+        goto(0,300)
+        write(RU_ow, move=False, align="center", font=("Courier New", 60, "normal"))
+        goto(0,-400)
+        write(RU_ctx, move=False, align="center", font=("Courier New", 60, "normal"))
+    screen.exitonclick()
 
 def XWIN(i):
     global last_selected
     clear_select(last_selected)
-    global EN_xw, RU_xw
+    global EN_xw, RU_xw, RU_ctx, EN_ctx
     if language == "EN":
         title(EN_xw)
+        up()
+        goto(0,300)
+        pencolor("black")
+        write(EN_xw, move=False, align="center", font=("Courier New", 60, "normal"))
+        goto(0,-400)
+        write(EN_ctx, move=False, align="center", font=("Courier New", 60, "normal"))
     if language == "RU":
         title(RU_xw)
-    exitonclick()
+        up()
+        goto(0,300)
+        pencolor("black")
+        write(RU_xw, move=False, align="center", font=("Courier New", 60, "normal"))
+        goto(0,-400)
+        write(RU_ctx, move=False, align="center", font=("Courier New", 60, "normal"))
+    screen.exitonclick()
 
 def DRAW():
     global last_selected
     clear_select(last_selected)
-    global EN_d, RU_d
+    global EN_d, RU_d, RU_ctx, EN_ctx
     if language == "EN":
         title(EN_d)
+        up()
+        goto(0,300)
+        pencolor("black")
+        write(EN_d, move=False, align="center", font=("Courier New", 60, "normal"))
+        goto(0,-400)
+        write(EN_ctx, move=False, align="center", font=("Courier New", 60, "normal"))
     if language == "RU":
         title(RU_d)
-    exitonclick()
+        up()
+        goto(0,300)
+        pencolor("black")
+        write(RU_d, move=False, align="center", font=("Courier New", 60, "normal"))
+        goto(0,-400)
+        write(RU_ctx, move=False, align="center", font=("Courier New", 60, "normal"))
+    screen.exitonclick()
 
 def WinCheck():
     for i in range(0,9):
